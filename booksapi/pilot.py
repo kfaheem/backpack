@@ -1,5 +1,6 @@
 import requests
 import pandas as pd
+import os
 
 
 # GET /lists/names.json
@@ -68,25 +69,28 @@ def main():
     :return:
     """
     try:
-        api_key = "j53zTLkp6zFv7aGI6gzFLQEJl8FyQ9xw"
-        list_names = []
-        best_sellers = []
-        best_seller_ok_list = []
-        get_list_names_response = get_list_names(url_prefix=get_list_names_url,
-                                                 api_key=api_key).to_dict(orient="records")
-        for item in get_list_names_response:
-            list_names.append(item.get("list_name"))
+        api_key = os.environ.get("api_key")
+        if api_key:
+            list_names = []
+            best_sellers = []
+            best_seller_ok_list = []
+            get_list_names_response = get_list_names(url_prefix=get_list_names_url,
+                                                     api_key=api_key).to_dict(orient="records")
+            for item in get_list_names_response:
+                list_names.append(item.get("list_name"))
 
-        for list_name in list_names:
-            get_best_seller_list_response = get_best_seller_list(url_prefix=get_list_url,
-                                                                 api_key=api_key, list_name=list_name)
-            if get_best_seller_list_response:
-                best_seller_ok_list.append(list_name)
-                best_sellers.append(get_best_seller_list_response[1])
+            for list_name in list_names:
+                get_best_seller_list_response = get_best_seller_list(url_prefix=get_list_url,
+                                                                     api_key=api_key, list_name=list_name)
+                if get_best_seller_list_response:
+                    best_seller_ok_list.append(list_name)
+                    best_sellers.append(get_best_seller_list_response[1])
 
-        print(best_seller_ok_list)
-        best_sellers_df = pd.concat(best_sellers, axis=0)
+            best_sellers_df = pd.concat(best_sellers, axis=0)
+            print(best_sellers_df)
 
+        else:
+            print("Please pass the api-key as an env var")
 
     except Exception as exception:
         print("Received Exception in main function - {}".format(exception))

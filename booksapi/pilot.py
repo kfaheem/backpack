@@ -4,11 +4,13 @@ import os
 
 
 # GET /lists/names.json
+# Get Best Sellers list names.
 get_list_names_url = "https://api.nytimes.com/svc/books/v3/lists/names.json?"
 
 # GET /lists.json
 # Get Best Sellers list. If no date is provided returns the latest list.
-get_list_url = "https://api.nytimes.com/svc/books/v3/lists.json?"  # list={}(required) & bestsellers-date
+get_list_url = "https://api.nytimes.com/svc/books/v3/lists.json?"
+# list={}(required) & bestsellers-date & published-date & offset
 
 
 def get_list_names(url_prefix, api_key):
@@ -22,9 +24,13 @@ def get_list_names(url_prefix, api_key):
         url = url_prefix + "api-key={}".format(api_key)
         response = requests.get(url)
         print("get_list_names response - {}".format(response))
-        df = pd.DataFrame(response.json())
-        results_df = pd.json_normalize(df["results"])
-        return results_df.drop_duplicates(subset="list_name")
+        if response:
+            if response.json().get("status") == "OK":
+                df = pd.DataFrame(response.json())
+                results_df = pd.json_normalize(df["results"])
+                return True, results_df.drop_duplicates(subset="list_name")
+        else:
+            return False
 
     except Exception as exception:
         print("Received Exception in get_list_names function - {}".format(exception))
@@ -52,6 +58,10 @@ def get_best_seller_list(url_prefix, api_key, list_name, **kwargs):
             if response.json().get("status") == "OK":
                 df = pd.DataFrame(response.json())
                 results_df = pd.json_normalize(df["results"])
+                results_df["Title"] = results_df.apply(lambda row: row["book_details"][0].get("title"), axis=1)
+                results_df["Description"] = results_df.apply(lambda row: row["book_details"][0].get("description"),
+                                                             axis=1)
+                results_df["Author"] = results_df.apply(lambda row: row["book_details"][0].get("author"), axis=1)
                 return True, results_df
             else:
                 return None
@@ -60,6 +70,26 @@ def get_best_seller_list(url_prefix, api_key, list_name, **kwargs):
 
     except Exception as exception:
         print("Received Exception in get_best_seller_list function - {}".format(exception))
+        raise exception
+
+
+def create_csv(best_sellers_df, **kwargs):
+    """
+
+    :param best_sellers_df:
+    :param kwargs:
+    :return:
+    """
+    try:
+        if kwargs.get("csv_path"):
+            csv_path = kwargs.get("csv_path")
+        else:
+            csv_path = "{}/nyt_best_sellers.csv".format(os.getcwd())
+        best_sellers_df.to_csv(csv_path, header=True)
+        return True
+
+    except Exception as exception:
+        print("Received Exception in create_csv function - {}".format(exception))
         raise exception
 
 
@@ -75,19 +105,22 @@ def main():
             best_sellers = []
             best_seller_ok_list = []
             get_list_names_response = get_list_names(url_prefix=get_list_names_url,
-                                                     api_key=api_key).to_dict(orient="records")
-            for item in get_list_names_response:
-                list_names.append(item.get("list_name"))
+                                                     api_key=api_key)
+            if get_list_names_response:
+                for item in get_list_names_response[1].to_dict(orient="records"):
+                    list_names.append(item.get("list_name"))
 
-            for list_name in list_names:
-                get_best_seller_list_response = get_best_seller_list(url_prefix=get_list_url,
-                                                                     api_key=api_key, list_name=list_name)
-                if get_best_seller_list_response:
-                    best_seller_ok_list.append(list_name)
-                    best_sellers.append(get_best_seller_list_response[1])
+                for list_name in list_names:
+                    get_best_seller_list_response = get_best_seller_list(url_prefix=get_list_url,
+                                                                         api_key=api_key, list_name=list_name)
+                    if get_best_seller_list_response:
+                        best_seller_ok_list.append(list_name)
+                        best_sellers.append(get_best_seller_list_response[1])
 
-            best_sellers_df = pd.concat(best_sellers, axis=0)
-            print(best_sellers_df)
+                best_sellers_df = pd.concat(best_sellers, axis=0)
+                create_csv(best_sellers_df=best_sellers_df
+            else:
+                print("No list names received")
 
         else:
             print("Please pass the api-key as an env var")

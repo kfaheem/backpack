@@ -118,7 +118,7 @@ def main():
                         best_sellers.append(get_best_seller_list_response[1])
 
                 best_sellers_df = pd.concat(best_sellers, axis=0)
-                create_csv(best_sellers_df=best_sellers_df
+                create_csv(best_sellers_df=best_sellers_df)
             else:
                 print("No list names received")
 

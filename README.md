@@ -1,1 +1,1 @@
-<img src="images/backpack.jpg" width="200" height="200" >
+<img src="images/backpack.jpg" width="300" height="300" >

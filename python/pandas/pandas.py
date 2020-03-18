@@ -58,7 +58,7 @@ for _, row in df11.iterrows():
 for row in df11.itertuples():
     row.col_new = row.col1 + row.col2
 
-for index in range(len(df11)): # faster than above 2 loops
+for index in range(len(df11)):  # faster than above 2 loops
     df11["new_col"] = df11["col1"].iloc[index] + df11["col2"].iloc[index]
 
 df11["new_col"] = (df11["col1"] + df11["col2"]).sum()  # fastest
@@ -70,3 +70,13 @@ obj6 = [1, 2, 3, 4, 4, 5]
 ser = pd.Series(obj6, dtype="str")
 
 ser.isdigit(), ser.split(), ser.lower()  # basically all string operations
+
+# Pandas Pivot Table ==========================================
+
+pivot_df = pd.pivot_table(df11, index=["col1", "col2"], aggfunc=["mean", "max", "min"])
+
+pivot_view = pivot_df.pivot(index="col1", columns="col3", values="col5")
+
+
+
+

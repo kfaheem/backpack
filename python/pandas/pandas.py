@@ -4,7 +4,7 @@ import pandas as pd
 # Creating dataframe from object==========================================
 
 obj1 = [{}, {}, {}]
-df1 = pd.DataFrame(obj1, dtype={"col1": "str", "col2": "int", "col3": "bool"})
+df1 = pd.DataFrame(obj1, dtype={"col1": "str", "col2": "int", "col3": "bool"})  # passing dtype improves performance
 
 obj2 = {"a": [], "b": [], "c": []}
 df2 = pd.DataFrame(obj2)

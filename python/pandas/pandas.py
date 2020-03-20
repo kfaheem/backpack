@@ -67,6 +67,8 @@ df15 = df14.stack()
 
 df15["new_col"] = df15.apply(lambda x: x["cola"] - x["colb"], axis=1)
 
+df16 = pd.merge(df14, df15, on="some_col")
+
 # Dataframe loops ==========================================
 
 for _, row in df11.iterrows():

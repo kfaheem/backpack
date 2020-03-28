@@ -248,10 +248,3 @@ def seaborn_charts(df):
 
     heat_map = sns.heatmap(data=["some_list"], cmap=["yellow", "red"])
 
-
-
-
-
-
-
-

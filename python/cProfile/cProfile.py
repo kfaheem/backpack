@@ -1,6 +1,8 @@
 from cProfile import Profile
 import pstats
 
+from timeit import Timer
+
 
 def some_func(foo, bar):
     """
@@ -33,12 +35,14 @@ def main():
     except Exception as exception:
         raise exception
 
-# measure performance of a full function
 
-
+# to measure performance of a full function
 profile = Profile()
 profile.runcall(main)
 stats = pstats.Stats(profile)
 stats.print_stats()
 stats.sort_stats()
+
+# or we can run a function with Timer
+Timer(some_func())
 

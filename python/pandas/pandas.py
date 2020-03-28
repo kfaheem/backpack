@@ -1,4 +1,4 @@
-import pandas as pd
+import pandas as pd  # using "import modin.pandas as pd" is touted to be faster
 import swifter
 import seaborn as sns
 import matplotlib.pyplot as plot
@@ -112,6 +112,7 @@ def apply_df(df):
 
     # for a faster apply operation
     df["new_column"] = df.swifter.apply(lambda row: row["col1"] + row["col2"], axis=1)
+    # using engine="numba" can also improve speed
 
 
 def transform_df(df):

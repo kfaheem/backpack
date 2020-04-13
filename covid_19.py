@@ -1,10 +1,6 @@
 from bs4 import BeautifulSoup
 import requests
-from lxml import html
-import json
 import logging
-import boto3
-from botocore.exceptions import ClientError
 from elasticsearch import Elasticsearch, RequestsHttpConnection
 from elasticsearch import helpers
 

@@ -68,15 +68,16 @@ def loop_df(df):
     """
     # to perform transformation on a df, for example creating a new column from existing columns, we can
     # loop over the dataframe in several ways
+    sum_total = 0
 
     for index, row in df.iterrows():
-        row["new_column"] = row["col1"] + row["col2"]
+        sum_total += row["col1"] + row["col2"]
 
     for row in df.itertuples():
-        row.new_column = row.col1 + row.col2
+        sum_total += row.col1 + row.col2
 
     for index, row in range(len(df)):
-        row["new_column"] = row["col1"].iloc[index] + row["col1"].iloc[index]
+        sum_total += row["col1"].iloc[index] + row["col1"].iloc[index]
 
     # for simpler operations like adding two columns, using pandas inbuilt functions would be the fastest option
     df["new_column"] = (df["col1"] + df["col2"]).sum()

@@ -1,1 +1,1 @@
-<img src="cassandra.jpg" width="300" height="500" >
+<img src="cassandra.jpg" width="300" height="200" >

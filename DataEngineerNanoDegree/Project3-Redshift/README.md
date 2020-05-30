@@ -1,1 +1,1 @@
-<img src="redshift_project.png" width="750" height="600" >
+<img src="redshift_project.png" width="800" height="600" >

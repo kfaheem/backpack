@@ -1,1 +1,1 @@
-<img src="amazon_redshift_logo.png" width="300" height="100" >
+<img src="redshift_project.png" width="750" height="600" >

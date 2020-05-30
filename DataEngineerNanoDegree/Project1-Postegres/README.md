@@ -1,1 +1,1 @@
-<img src="postgres_project.png" width="500" height="600" >
+<img src="postgres_project.png" width="600" height="500" >

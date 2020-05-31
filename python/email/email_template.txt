@@ -1,0 +1,24 @@
+<html>
+<body>
+<p>Hi ${USER},</p>
+
+<p>This is a test email.</p>
+
+<style type="text/css">
+# place holder for table style
+# .tftable th
+# .tftable tf
+# .tftable td
+</style>
+
+<table class="tftable" border="1">
+<tr><th> Header 1</th><th> Header 2</th><th> Header 3 </th></tr>
+${HTML_ROWS} # in this form --> <tr><td> Value 1</td><td> Value 2</td><td> Value 3</td></tr>
+
+</table>
+
+<p><strong style="color:red;"> SOME MESSAGE </strong></p> # strong --> bold
+</body>
+</html>
+
+

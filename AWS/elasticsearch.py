@@ -66,6 +66,7 @@ while scroll_size > 0:
 # elasticsearch query examples ================================
 
 query1 = {
+    "_source": ["field1", "field2"],
     "query": {
         "bool": {
             "must": [

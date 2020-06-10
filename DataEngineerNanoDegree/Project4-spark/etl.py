@@ -22,11 +22,12 @@ def create_spark_session():
 
 def process_song_data(spark, input_data, output_data):
     """
-
-    :param spark:
-    :param input_data:
-    :param output_data:
-    :return:
+    I read data from the song_data datasets from S3, create songs & artists tables and store the output
+    as parquet files back in S3.
+    :param spark: Spark Session
+    :param input_data: str - S3 location for Input data
+    :param output_data: str - S3 location for Output data
+    :return: True if the execution is successful
     """
     # get filepath to song data file
     song_data = "{}/song_data/*".format(input_data)
@@ -47,14 +48,18 @@ def process_song_data(spark, input_data, output_data):
     # write artists table to parquet files
     artists_table.write.parquet("{}/artists.parquet".format(output_data))
 
+    return True
+
 
 def process_log_data(spark, input_data, output_data):
     """
-
+    I read data from the log_data datasets from S3, create users & time tables, join the log & song tables to
+    create songplays table and store the output as parquet files back in S3
+    as parquet files back in S3.
     :param spark:
-    :param input_data:
-    :param output_data:
-    :return:
+    :param input_data: str - S3 location for Input data
+    :param output_data: str - S3 location for Output data
+    :return: True if the execution is successful
     """
     # get filepath to log data file
     log_data = "{}/log_data/*".format(input_data)
@@ -63,7 +68,7 @@ def process_log_data(spark, input_data, output_data):
     df = spark.read.json(log_data)
 
     # filter by actions for song plays
-    df = df.where("page"=="NextSong")
+    df = df.where("page" == "NextSong")
 
     # log_table temp_view
     df.createOrReplaceTempView("log_table")
@@ -123,6 +128,8 @@ def process_log_data(spark, input_data, output_data):
 
     # write songplays table to parquet files partitioned by year and month
     songplays_table.write.partitionBy("year", "month").parquet("{}/songplays.parquet".format(output_data))
+
+    return True
 
 
 def main():

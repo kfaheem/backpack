@@ -43,7 +43,7 @@ log_data/2018/11/2018-11-13-events.json
 
 And below is an example of what the data in a log file, 2018-11-12-events.json, looks like.
 
-<img src="log-data.png" width="500" height="200" ></b>
+<img src="log-data.png" width="800" height="200" ></b>
 
 
 <b>Schema for Song Play Analysis</b>

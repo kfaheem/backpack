@@ -10,7 +10,7 @@ A solution to establish the ability to query their data which currently resides 
 The Postgresql database can be leveraged to create a star schema which would comprise of a central Fact table and Dimension tables arranged in a Denormalized fashion which not only helps make the data model easy to understand from a Business perspective but also helps perform efficient OLTP operations on the data. 
 In order to make the ETL process efficient, Pandas Dataframes can be leveraged as a staging tool to load all the data from the songs & logs json files. Looping over a Dataframe would offer more efficiency as opposed to doing the ETL process in pure Python.   
 
-### <b>ETL</b>
+### <b>ETL Pipeline</b>
 
 1. Write SQL queries in sql_queries.py.
 2. Run the create_tables.py script to drop & create the required tables.
@@ -28,6 +28,6 @@ In order to make the ETL process efficient, Pandas Dataframes can be leveraged a
        start_time, hour, day, week, month, year, weekday 
 3. Run the etl.py script to load the songs & logs json files into Pandas Dataframes & then load the data from the Dataframes into the corresponding tables created in step 2.
 
-#### <b>ETL Architecture</b>
+### <b>ETL Architecture</b>
 
 <img src="postgres_project.png" width="750" height="600" >

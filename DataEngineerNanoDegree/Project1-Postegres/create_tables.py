@@ -1,5 +1,9 @@
 import psycopg2
 from sql_queries import create_table_queries, drop_table_queries
+import logging
+
+logger = logging.getLogger()
+logger.setLevel(logging.INFO)
 
 
 def create_database():
@@ -45,8 +49,10 @@ def create_tables(cur, conn):
             print("Query {}/{}".format(i + 1, len(create_table_queries)))
             cur.execute(query)
             conn.commit()
+
     except Exception as exception:
-        print("Received Exxception in create_tables function - {}".format(exception))
+        logger.error("Received Exception in create_tables function in create_tables.py - {}".format(exception))
+        raise exception
 
 
 def main():

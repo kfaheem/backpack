@@ -15,17 +15,29 @@ In order to make the ETL process efficient, Pandas Dataframes can be leveraged a
 1. Write SQL queries in sql_queries.py.
 2. Run the create_tables.py script to drop & create the required tables.
 <b>Fact Table</b>
+
     <b>songplays - records in log data associated with song plays i.e. records with page NextSong
+    
        songplay_id, start_time, user_id, level, song_id, artist_id, session_id, location, user_agent
+       
 <b>Dimension Tables</b>
+
     <b>users</b> - users in the app
+    
        user_id, first_name, last_name, gender, level
+       
     <b>songs</b> - songs in music database
+    
        song_id, title, artist_id, year, duration
+       
     <b>artists</b> - artists in music database
+    
        artist_id, name, location, latitude, longitude
+       
     <b>time</b> - timestamps of records in songplays broken down into specific units
+    
        start_time, hour, day, week, month, year, weekday 
+       
 3. Run the etl.py script to load the songs & logs json files into Pandas Dataframes & then load the data from the Dataframes into the corresponding tables created in step 2.
 
 ### <b>ETL Architecture</b>

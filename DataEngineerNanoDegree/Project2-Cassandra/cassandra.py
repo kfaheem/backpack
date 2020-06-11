@@ -91,7 +91,7 @@ with open(file, encoding = 'utf8') as f:
     next(csvreader) # skip header
     for line in csvreader:
 ## TO-DO: Assign the INSERT statements into the `query` variable
-        query = "INSERT INTO table1 (artist, song, duration, sessionId, iteminSession) "
+        query = "INSERT INTO table1 (artist, song, duration, sessionId, iteminSession)"
         query = query + "VALUES (%s, %s, %s, %s, %s)"
         ## TO-DO: Assign which column element should be assigned for each column in the INSERT statement.
         ## For e.g., to INSERT artist_name and user first_name, you would change the code below to `line[0], line[1]`

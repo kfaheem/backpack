@@ -18,46 +18,54 @@ time_table_drop = "DROP TABLE IF EXISTS time"
 
 staging_events_table_create = ("""
     CREATE TABLE IF NOT EXISTS staging_events (
-                event_id    BIGINT IDENTITY(0,1)    NOT NULL,
-                artist      VARCHAR                 NULL,
-                auth        VARCHAR                 NULL,
-                firstName   VARCHAR                 NULL,
-                gender      VARCHAR                 NULL,
-                itemInSession VARCHAR               NULL,
-                lastName    VARCHAR                 NULL,
-                length      VARCHAR                 NULL,
-                level       VARCHAR                 NULL,
-                location    VARCHAR                 NULL,
-                method      VARCHAR                 NULL,
-                page        VARCHAR                 NULL,
-                registration VARCHAR                NULL,
-                sessionId   INTEGER                 NOT NULL SORTKEY DISTKEY,
-                song        VARCHAR                 NULL,
-                status      INTEGER                 NULL,
-                ts          BIGINT                  NOT NULL,
-                userAgent   VARCHAR                 NULL,
-                userId      INTEGER                 NULL
+                event_id    BIGINT IDENTITY(0,1),
+                artist      VARCHAR,
+                auth        VARCHAR,
+                firstName   VARCHAR,
+                gender      VARCHAR,
+                itemInSession VARCHAR,
+                lastName    VARCHAR,
+                length      VARCHAR,
+                level       VARCHAR,
+                location    VARCHAR,
+                method      VARCHAR ,
+                page        VARCHAR,
+                registration VARCHAR,
+                sessionId   INT,
+                song        VARCHAR,
+                status      INT,
+                ts          BIGINT,
+                userAgent   VARCHAR,
+                userId      INT                
     );
 """)
 
 staging_songs_table_create = ("""
     CREATE TABLE IF NOT EXISTS staging_songs (
-                num_songs           INTEGER         NULL,
-                artist_id           VARCHAR         NOT NULL SORTKEY DISTKEY,
-                artist_latitude     VARCHAR         NULL,
-                artist_longitude    VARCHAR         NULL,
-                artist_location     VARCHAR(500)   NULL,
-                artist_name         VARCHAR(500)   NULL,
-                song_id             VARCHAR         NOT NULL,
-                title               VARCHAR(500)   NULL,
-                duration            DECIMAL(9)      NULL,
-                year                INTEGER         NULL
+                num_songs           INTEGER,
+                artist_id           VARCHAR,
+                artist_latitude     VARCHAR,
+                artist_longitude    VARCHAR,
+                artist_location     VARCHAR,
+                artist_name         VARCHAR,
+                song_id             VARCHAR,
+                title               VARCHAR,
+                duration            FLOAT,
+                year                INTEGER
     );
 """)
 
-songplay_table_create = ("""CREATE TABLE IF NOT EXISTS songplays (songplay_id INTEGER IDENTITY(0,1) PRIMARY KEY, start_time varchar, 
-user_id varchar, level varchar, song_id varchar, artist_id varchar, session_id int, 
-location varchar, user_agent varchar)
+songplay_table_create = ("""
+    CREATE TABLE IF NOT EXISTS songplays (
+            songplay_id         INT IDENTITY(0,1)       PRIMARY KEY, 
+            start_time          VARCHAR                 NOT NULL, 
+            user_id             VARCHAR                 NOT NULL, 
+            level               VARCHAR                 NOT NULL, 
+            song_id             VARCHAR                 NOT NULL, 
+            artist_id           VARCHAR                 NOT NULL, 
+            session_id          INT                     NOT NULL, 
+            location            VARCHAR                 NOT NULL, 
+            user_agent          VARCHAR                 NOT NULL)
 """)
 
 user_table_create = ("""CREATE TABLE IF NOT EXISTS users (user_id varchar PRIMARY KEY, first_name varchar, 

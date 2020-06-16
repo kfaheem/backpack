@@ -62,4 +62,4 @@ The final operator to create is the data quality operator, which is used to run 
 For example one test could be a SQL statement that checks if certain column contains NULL values by counting all the rows that have NULL in the column. We do not want to have any NULLs so expected result would be 0 and the test would compare the SQL statement's outcome to the expected result.
 
 ### <b>Airflow Graph View</b>
-<img src="airflow_graph_view.png" width="1000" height="200" >
+<img src="airflow_graph_view.png" width="1000" height="250" >

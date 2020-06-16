@@ -11,7 +11,7 @@ from helpers import SqlQueries
 
 default_args = {
     'owner': 'KFaheem',
-    'start_date': datetime(2020, 6, 13),
+    'start_date': datetime.now(),
     'depends_on_past': False,
     'retries': 3,
     'retry_delay': timedelta(minutes=5),
@@ -55,7 +55,7 @@ load_songplays_table = LoadFactOperator(
     task_id='Load_songplays_fact_table',
     dag=dag,
     provide_context=True,
-    aws_credentials_id="aws_credentials",
+    table="songplay",
     redshift_conn_id='redshift',
     create_stmt=SqlQueries.create_table_songplays,
     sql_query=SqlQueries.songplay_table_insert
@@ -65,7 +65,7 @@ load_user_dimension_table = LoadDimensionOperator(
     task_id='Load_user_dim_table',
     dag=dag,
     provide_context=True,
-    aws_credentials_id="aws_credentials",
+    table="users",
     redshift_conn_id='redshift',
     create_stmt=SqlQueries.create_table_users,
     sql_query=SqlQueries.user_table_insert
@@ -75,7 +75,7 @@ load_song_dimension_table = LoadDimensionOperator(
     task_id='Load_song_dim_table',
     dag=dag,
     provide_context=True,
-    aws_credentials_id="aws_credentials",
+    table="users",
     redshift_conn_id='redshift',
     create_stmt=SqlQueries.create_table_songs,
     sql_query=SqlQueries.song_table_insert
@@ -85,7 +85,7 @@ load_artist_dimension_table = LoadDimensionOperator(
     task_id='Load_artist_dim_table',
     dag=dag,
     provide_context=True,
-    aws_credentials_id="aws_credentials",
+    table="artists",
     redshift_conn_id='redshift',
     create_stmt=SqlQueries.create_table_artist,
     sql_query=SqlQueries.artist_table_insert
@@ -95,7 +95,7 @@ load_time_dimension_table = LoadDimensionOperator(
     task_id='Load_time_dim_table',
     dag=dag,
     provide_context=True,
-    aws_credentials_id="aws_credentials",
+    table="time",
     redshift_conn_id='redshift',
     create_stmt=SqlQueries.create_table_time,
     sql_query=SqlQueries.time_table_insert
@@ -105,8 +105,8 @@ run_quality_checks = DataQualityOperator(
     task_id='Run_data_quality_checks',
     dag=dag,
     provide_context=True,
-    aws_credentials_id="aws_credentials",
     redshift_conn_id='redshift',
+    tables=['artists', 'songplays', 'songs', 'users', 'time']
 )
 
 end_operator = DummyOperator(task_id='Stop_execution',  dag=dag)

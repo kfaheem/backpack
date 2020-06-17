@@ -2,4 +2,4 @@
 
 ### <b>ETL Architecture</b>
 
-<img src="capstone_etl.png" width="600" height="150" ></b>
+<img src="capstone_etl.png" width="800" height="200" ></b>

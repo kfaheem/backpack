@@ -1,0 +1,14 @@
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Sid": "es_access",
+      "Effect": "Allow",
+      "Principal": {
+        "AWS": "arn:aws:iam::123456789:role/my-ec2-role"
+      },
+      "Action": "es:*",
+      "Resource": "arn:aws:es:us-west-2:123456789:domain/myDomain/*"
+    }
+  ]
+}

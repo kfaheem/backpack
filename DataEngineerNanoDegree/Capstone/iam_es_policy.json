@@ -1,0 +1,18 @@
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Effect": "Allow",
+      "Principal": {
+        "AWS": [
+          "arn:aws:iam::123456789012:role/power-user-role"
+        ]
+      },
+      "Action": [
+        "es:ESHttpGet",
+        "es:ESHttpPut"
+      ],
+      "Resource": "arn:aws:es:us-west-1:987654321098:domain/test-domain/test-index/*"
+    }
+  ]
+}

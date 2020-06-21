@@ -22,18 +22,18 @@ print(path)
 #
 #     df3 = df2[select][1:].to_csv(op_path, index=False, header=True)
 
-df4 = pd.read_csv("{}/covid_county_data/confirmed_cases.csv".format(path))
-# print(df4)
-
-columns = df4.columns.tolist()
-
-dates = columns[4:]
-# print(columns)
-
-for date in dates:
-    op_date = date.replace("/", "-")
-    op_path = "{}/covid_county_data/confirmed_cases/{}.csv".format(path, op_date)
-
-    select = ['countyFIPS', 'County Name', 'State', 'stateFIPS', date]
-
-    df5 = df4[select][1:].to_csv(op_path, index=False, header=True)
+# df4 = pd.read_csv("{}/covid_county_data/confirmed_cases.csv".format(path))
+# # print(df4)
+#
+# columns = df4.columns.tolist()
+#
+# dates = columns[4:]
+# # print(columns)
+#
+# for date in dates:
+#     op_date = date.replace("/", "-")
+#     op_path = "{}/covid_county_data/confirmed_cases/{}.csv".format(path, op_date)
+#
+#     select = ['countyFIPS', 'County Name', 'State', 'stateFIPS', date]
+#
+#     df5 = df4[select][1:].to_csv(op_path, index=False, header=True)

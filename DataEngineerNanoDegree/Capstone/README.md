@@ -316,6 +316,25 @@ The data is obtained from two distinct sources.
 ### <b>ETL Architecture</b>
 ***
 
+This model leverages Python & Pandas read, clean, transform & load data to the target location. 
+
+The data from both sources comprises of approximately 1.2 Million records/rows. 
+
+Pandas offers an efficient way to handle such large amounts of data through its DataFrame API.
+
+One may argue that Spark Dataframes can offer more processing speed than Pandas. 
+
+While that may be true, 1.2 Million records/rows is still an amount that is efficiently manageable by Pandas.
+
+The target location for the data is an Elasticsearch domain. 
+
+Having an Elasticsearch domain achieved several goals. 
+
+    1. Elasticsearch is a NoSQL Database. Which means we do not have to worry about maintaining a schema. Especially when it comes to data that is sourced from several places and is readily available 'out-of-the-box',
+    we need a storage that accomodates variable schema. 
+    2. Elasticsearch also offers massive scalability which should easily accommodate future data surges.
+    3. Elasticsearch offers a seamless integration with Kibana, which makes analyzing & visualizing the data significantly easy.
+
 <img src="capstone_etl.png" width="800" height="400" >
 
 ### <b>ETL Process</b>
@@ -338,7 +357,8 @@ The data is obtained from two distinct sources.
     4. The concatenated dataframes are then joined with another dataframe which carries the county population data
     5. The merged dataframes are then posted to an Elasticsearch index using thr Bulk API.
     
-## **Elasticsearch Setup**
+    
+### **Elasticsearch Setup**
 ***
 
 For this project, an Elasticsearch Domain was provisioned from the AWS Management Console.
@@ -371,3 +391,53 @@ Following is the Elasticsearch access policy -
       ]
     }
     
+### Handling Edge Cases
+***
+
+The project works fine under ideal conditions, but we also need to be geared up to handle non-ideal edge cases.
+
+1. What if the data increased by 100x?
+
+    Here, we need to think of two aspects - `Processing` & `Storage`.
+    
+    **`Processing`** - 
+    
+    Handling massive amounts of data can take a toll on your local machine.
+    In that case, We can look at a few different alternatives to run the same code more efficiently.
+    1. We can build a Docker Image and run our scripts inside the a container of that image.
+    2. We can also provision an EC2 instance with a compute-optimized class and run our scripts on that instance.
+    3. If we still need more compute power, we can leverage Spark Dataframes to reduce our processing time.
+    4. Any of the above solutions can be further "scaled out" in the form of a cluster deployment. 
+    For example - A Kubernetes cluster with Docker containers or an EMR Spark-based cluster, etc.
+    
+    The above mentioned solutions can prove to be significantly more costly. So we need to careful design
+    the infrastructure in a way that is optimal, both processing speed-wise & cost-wise. 
+    A careful consideration towards running the instances on a fixed schedule, terminating/creating instances as needed or utiliizng Spot instances 
+    can help us achieve an optimal pipeline.
+    
+    **`Storage`** -
+    
+    As mentioned in the architecture above, Elasticsearch is a NoSQL database that offers massive scalable storage capacity.
+    To handle significantly larger data, we can use larger instances and also scale out the Elasticsearch cluster to include more number of Master & Worker nodes as needed. 
+
+2. The pipelines would be run on a daily basis by 7 am every day.
+    
+    This is easily achievable by having some sort of schedule that triggers the pipeline.
+    For example, an EC2-based pipeline can be triggered using a Lambda that runs on a Cron Schedule.
+    Airflow too offers a @daily schedule_interval as a feature to trigger the pipeline daily.
+    
+3. The database needed to be accessed by 100+ people.
+
+    One way to achieve this could be to have an open Elasticsearch endpoint which can be accessed by virtually everyone.
+    But, that is definitely not the most appropriate way to go about this requirement.
+    Having an open access Elasticsearch straightaway puts the domain at a high risk of security vulnerability.
+    
+    The right way would include two aspects - 
+    1. A solution that offers high availability so that several people can access the data concurrently.
+    2. Also, the data store should be secure.
+    
+    The above two aspects can be achieved using a combination of Web servers (could be EC2 based), Auto Scaling Groups (ASG), AWS Application Load Balancer (ALB) & Route53.
+    We can setup a Route53 policy that is latency or geolocation based. This would route the traffic to the ALB in a way that offers minimal response time to users.
+    The ALB pointing towards the Web Servers has the ability to intelligently balance the load owing to the incoming traffic.
+    Having the servers inside an ASG would ensure that all servers have a regular health check. If any server fails a health check, the ASG decomissiones the server and replaces it with a new one.
+    This makes sure that the users do not experience any undesired latency in accessing the data. 

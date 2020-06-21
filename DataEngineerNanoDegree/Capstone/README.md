@@ -337,3 +337,37 @@ The data is obtained from two distinct sources.
        based on the file type
     4. The concatenated dataframes are then joined with another dataframe which carries the county population data
     5. The merged dataframes are then posted to an Elasticsearch index using thr Bulk API.
+    
+## **Elasticsearch Setup**
+***
+
+For this project, an Elasticsearch Domain was provisioned from the AWS Management Console.
+
+Instance type used - **m5.large.elasticsearch**
+
+The domain was allowed open access from all traffic. Ideally though, a fine-grained access policy should be assigned to the domain & the domain should be placed inside a VPC.
+
+Following is the Elasticsearch access policy - 
+
+    {
+      "Version": "2012-10-17",
+      "Statement": [
+        {
+          "Sid": "es_ip_access",
+          "Effect": "Allow",
+          "Principal": {
+            "AWS": "*"
+          },
+          "Action": "es:*",
+          "Resource": "arn:aws:es:us-west-2:xxxxxxxxxxxx:domain/my-elasticsearch-domain/*",
+          "Condition": {
+            "IpAddress": {
+              "aws:SourceIp": [
+                "0.0.0.0/0"
+              ]
+            }
+          }
+        }
+      ]
+    }
+    

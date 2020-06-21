@@ -311,6 +311,7 @@ The data is obtained from two distinct sources.
     |   1 | covid_deaths                                 |       150       |  150*3194      |
     |   2 | county_populcation.csv                       |         1       |      3194      |
     
+
 ### <b>ETL Architecture</b>
 
-<img src="capstone_etl.png" width="550" height="150" ></b>
+![](capstone_etl.png)

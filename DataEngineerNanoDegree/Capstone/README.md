@@ -321,16 +321,18 @@ The data is obtained from two distinct sources.
 ### <b>ETL Process</b>
 ***
 
-    **Covid Cases by Country**
-        1. Run covid_cases_by_country.py
-        2. The script hits the endpoint **https://api.covid19api.com/countries** & gets all the available countries
-        3. The script iterates over the list of countries and gets all the covid data for each available day
-        4. The data is then posted to an Elasticsearch index using the Bulk API
+**Covid Cases by Country**
+
+    1. Run covid_cases_by_country.py
+    2. The script hits the endpoint **https://api.covid19api.com/countries** & gets all the available countries
+    3. The script iterates over the list of countries and gets all the covid data for each available day
+    4. The data is then posted to an Elasticsearch index using the Bulk API
      
-    **Covid Cases in USA by County**
-        1. Run covid_cases_usa.py
-        2. The script gathers all the data files under the covid_county_data folder
-        3. Each file is read into a Pandas Dataframe and all Dataframes are concatenated into a single Dataframe 
-           based on the file type
-        4. The concatenated dataframes are then joined with another dataframe which carries the county population data
-        5. The merged dataframes are then posted to an Elasticsearch index using thr Bulk API.
+**Covid Cases in USA by County**
+
+    1. Run covid_cases_usa.py
+    2. The script gathers all the data files under the covid_county_data folder
+    3. Each file is read into a Pandas Dataframe and all Dataframes are concatenated into a single Dataframe 
+       based on the file type
+    4. The concatenated dataframes are then joined with another dataframe which carries the county population data
+    5. The merged dataframes are then posted to an Elasticsearch index using thr Bulk API.

@@ -1,7 +1,8 @@
 import pandas as pd
 import os
+from glob import glob
 path = os.getcwd()
-print(path)
+# print(path)
 # df1 = pd.read_csv("{}/covid_county_data/county_population.csv".format(path))
 
 # print(df1)
@@ -37,3 +38,14 @@ print(path)
 #     select = ['countyFIPS', 'County Name', 'State', 'stateFIPS', date]
 #
 #     df5 = df4[select][1:].to_csv(op_path, index=False, header=True)
+
+# df6 = pd.read_csv("{}/covid_county_data/confirmed_cases/1-22-20.csv".format(path))
+
+# files = glob("{}/covid_county_data/confirmed_cases/*".format(path))
+# print(df6.count())
+
+# print(len(files))
+
+df = pd.read_csv("{}/covid_county_data/county_population.csv".format(path))
+
+# df.to_markdown("{}/table.md".format(path))

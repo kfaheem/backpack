@@ -4,7 +4,7 @@ The purpose of this project is to process Covid-19 data in an attempt to analyze
 ### **Data**
 The data is obtained from two distinct sources.
 
-* Source 1: **`Covid19API`** **https://covid19api.com**
+* Source 1: **`Covid19API`** - **https://covid19api.com**
     
     We particularly hit two endpoints - 
     
@@ -293,9 +293,9 @@ The data is obtained from two distinct sources.
 
 * Source 2: 
     
-    **CDC** **https://www.cdc.gov/coronavirus/2019-ncov/cases-updates/county-map.html**
+    **`CDC`** - **https://www.cdc.gov/coronavirus/2019-ncov/cases-updates/county-map.html**
             
-    **USAFacts** **https://usafacts.org/visualizations/coronavirus-covid-19-spread-map/**
+    **`USAFacts`** - **https://usafacts.org/visualizations/coronavirus-covid-19-spread-map/**
             
     The data mentioned on the CDC website is sourced from USAFacts everyday.
     

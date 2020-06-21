@@ -314,4 +314,4 @@ The data is obtained from two distinct sources.
 
 ### <b>ETL Architecture</b>
 
-![](capstone_etl.png)
+<img src="capstone_etl.png" width="550" height="150" >

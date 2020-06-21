@@ -8,9 +8,9 @@ The data is obtained from two distinct sources.
     
     We particularly hit two endpoints - 
     
-    1. "https://api.covid19api.com/countries" - This endpoint returns a list of all countries for which covid data is available
+    1. **"https://api.covid19api.com/countries"** - This endpoint returns a list of all countries for which covid data is available
     
-    2. "https://api.covid19api.com/dayone/country/<contry-name>" - This endpoint returns covid data for the given country.
+    2. **"https://api.covid19api.com/dayone/country/country-name"** - This endpoint returns covid data for the given country.
     
     Sample Response - 
     

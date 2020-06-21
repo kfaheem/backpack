@@ -1,5 +1,3 @@
-## Row Count for Covid Cases by Country
-
 |     | Slug                                         |   Count |
 |----:|:---------------------------------------------|--------:|
 |   0 | isle-of-man                                  |       0 |

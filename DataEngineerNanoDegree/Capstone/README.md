@@ -12,7 +12,7 @@ The data is obtained from two distinct sources.
     
     2. **https://api.covid19api.com/dayone/country/country-name** - This endpoint returns covid data for the given country.
     
-    Sample Response - 
+    **Sample Response -** 
     
         [
           {
@@ -35,7 +35,9 @@ The data is obtained from two distinct sources.
           }
       ]
       
-    Following is Row Count for each country - 
+    **Data Format -** **JSON**
+     
+    Following is the Row Count for each country - 
     
     |     | Slug                                         |   Count |
     |----:|:---------------------------------------------|--------:|
@@ -288,12 +290,27 @@ The data is obtained from two distinct sources.
     | 246 | nepal                                        |     148 |
     | 247 | south-africa                                 |     108 |
 
+
+* Source 2: 
+    
+    **CDC** **https://www.cdc.gov/coronavirus/2019-ncov/cases-updates/county-map.html**
+            
+    **USAFacts** **https://usafacts.org/visualizations/coronavirus-covid-19-spread-map/**
+            
+    The data mentioned on the CDC website is sourced from USAFacts everyday.
+    
+    The data was downloaded and stored in the covid_county_data folder partitioned day-wise.
+    
+    **Data Format -** **CSV**
+    
+    **Row Count -**
+    
+    |     | folder                                       | Number of Files | Number of Rows |
+    |----:|:---------------------------------------------|-----------------|---------------:|
+    |   0 | confirmed_cases                              |       150       |  150*3194      |
+    |   1 | covid_deaths                                 |       150       |  150*3194      |
+    |   2 | county_populcation.csv                       |         1       |      3194      |
+    
 ### <b>ETL Architecture</b>
 
 <img src="capstone_etl.png" width="550" height="150" ></b>
-
-Row Count
-
-confirmed cases - 150 files * 3194 rows
-covid deaths - 150 files * 3194 rows
-county_population - 3194 rows

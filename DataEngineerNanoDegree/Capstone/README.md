@@ -324,8 +324,9 @@ The data is obtained from two distinct sources.
 **Covid Cases by Country**
 
     1. Run covid_cases_by_country.py
-    2. The script hits the endpoint **https://api.covid19api.com/countries** & gets all the available countries
-    3. The script iterates over the list of countries and gets all the covid data for each available day
+    2. The script hits the endpoint https://api.covid19api.com/countries & gets all the available countries
+    3. The script iterates over the list of countries and gets all the covid data for each available day by hitting 
+    the https://api.covid19api.com/dayone/country/country-name endpoint
     4. The data is then posted to an Elasticsearch index using the Bulk API
      
 **Covid Cases in USA by County**

@@ -445,3 +445,6 @@ The project works fine under ideal conditions, but we also need to be geared up 
     
     Having the servers inside an ASG would ensure that all servers have a regular health check. If any server fails a health check, the ASG decomissiones the server and replaces it with a new one.
     This makes sure that the users do not experience any undesired latency in accessing the data. 
+    
+    Placing all of the resources mentioned above inside a VPC with fine-grained Security Groups &
+    Access Control Lists would ensure that the setup is as secure as possible.

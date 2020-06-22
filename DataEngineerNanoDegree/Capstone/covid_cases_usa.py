@@ -106,7 +106,7 @@ def merge_df(covid_df, population_df):
     """
     try:
         logger.info("Covid DF Shape - {}".format(covid_df.shape))
-        logger.info("Populcation DF Shape - {}".format(population_df.shape))
+        logger.info("Population DF Shape - {}".format(population_df.shape))
 
         merged_df = pd.merge(covid_df, population_df[["County Name", "population"]], on="County Name")
 

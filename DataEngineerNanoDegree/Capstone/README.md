@@ -13,9 +13,9 @@ With the two features mentioned above, the project aims at serving two sections 
    Elasticsearch offers a powerful & flexible array of DSL queries that can be executed to obtain data as required for the usecase.
    
    A few DSL query examples - 
-   - We need to get the total number of confirmed covid cases of Switzerland on 2020-02-25.
+   We can run the following query if we need to get the total number of confirmed covid cases of Switzerland on 2020-02-25.
    
-       query = {
+        query = {
         "query": {
             "bool": {
                 "must": [
@@ -43,7 +43,7 @@ With the two features mentioned above, the project aims at serving two sections 
                 ]
             }
         }
-    }
+        }
 
 2. The powerful dashboarding feature offers Data Analysts the ability to create intuitive & descriptive visuals to study & analyze patterns associated with the available datapoints.
 

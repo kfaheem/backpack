@@ -46,7 +46,7 @@ def get_unique_countries(countries):
         df = pd.DataFrame(countries)
         logger.info("Original Countries DF Shape - {}".format(df.shape))
 
-        unique_df = df.drop_duplicates(subset="Country")
+        unique_df = df.drop_duplicates(subset="Country Name")
         logger.info("Unique Countries DF Shape - {}".format(unique_df.shape))
 
         return unique_df.to_dict(orient="records")

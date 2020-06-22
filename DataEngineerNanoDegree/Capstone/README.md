@@ -1,6 +1,18 @@
 ## **Project: Capstone**
 The purpose of this project is to process Covid-19 data in an attempt to analyze & visualize the data to derive statistical information & study patterns in Covid cases in the USA & worldwide.
 
+The project is geared towards offering the following two features - 
+
+1. The ability to run DSL (Domain Specific Language) Query on Elasticsearch
+
+2. Kibana Dashboard visualization 
+
+With the two features mentioned above, the project aims at serving two sections of the audience. 
+
+1. Since Elasticsearch has the ability to store significantly large amounts of data, it can serve Data Scientists as a source and/or target for the data they need to train Machine Learning models.
+
+2. The powerful dashboarding feature offers Data Analysts the ability to create intuitive & descriptive visuals to study & analyze patterns associated with the available datapoints.
+
 ### **Data**
 ***
 The data is obtained from two distinct sources.

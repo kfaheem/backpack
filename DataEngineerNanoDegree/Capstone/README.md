@@ -10,6 +10,40 @@ The project is geared towards offering the following two features -
 With the two features mentioned above, the project aims at serving two sections of the audience. 
 
 1. Since Elasticsearch has the ability to store significantly large amounts of data, it can serve Data Scientists as a source and/or target for the data they need to train Machine Learning models.
+   Elasticsearch offers a powerful & flexible array of DSL queries that can be executed to obtain data as required for the usecase.
+   
+   A few DSL query examples - 
+   - We need to get the total number of confirmed covid cases of Switzerland on 2020-02-25.
+   
+       query = {
+        "query": {
+            "bool": {
+                "must": [
+                    {
+                        "bool": {
+                            "should": [
+                                {
+                                    "match": {
+                                        "Country": "Switzerland"
+                                    }
+                                },
+                                {
+                                    "match": {
+                                        "Date": "2020-02-25T00:00:00Z"
+                                    }
+                                },
+                                {
+                                    "match_phrase": {
+                                        "Status": "confirmed"
+                                    }
+                                }
+                            ]
+                        }
+                    }
+                ]
+            }
+        }
+    }
 
 2. The powerful dashboarding feature offers Data Analysts the ability to create intuitive & descriptive visuals to study & analyze patterns associated with the available datapoints.
 

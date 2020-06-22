@@ -12,7 +12,8 @@ With the two features mentioned above, the project aims at serving two sections 
 1. Since Elasticsearch has the ability to store significantly large amounts of data, it can serve Data Scientists as a source and/or target for the data they need to train Machine Learning models.
    Elasticsearch offers a powerful & flexible array of DSL queries that can be executed to obtain data as required for the usecase.
    
-   A few DSL query examples - 
+   DSL query example - 
+   
    We can run the following query if we need to get the total number of confirmed covid cases of Switzerland on 2020-02-25.
    
         query = {
@@ -46,6 +47,8 @@ With the two features mentioned above, the project aims at serving two sections 
         }
 
 2. The powerful dashboarding feature offers Data Analysts the ability to create intuitive & descriptive visuals to study & analyze patterns associated with the available datapoints.
+
+   Since each document carries a timestamp, Elasticsearch offers a live tracker which enables us to monitor a time-series trend of the incoming data on the fly. 
 
 ### **Data**
 ***
@@ -359,6 +362,72 @@ The data is obtained from two distinct sources.
     |   2 | county_populcation.csv                       |         1       |      3194      |
     
 
+### **Data Dictionary**
+***
+
+* Source 1: **`Covid19API`** -
+
+Each document from the Covid19API is rendered into the following data structure before it posted to Elasticsearch - 
+
+    {
+        "op_type": "update",
+        "_index": "covid_by_country",
+        "_type": "_doc",
+        "_id": _id,
+        "doc": {
+                    "Country": "Switzerland", 
+                    "CountryCode": "CH", 
+                    "Lat": "46.82", 
+                    "Lon": "8.23", 
+                    "Cases": 1,
+                    "Status": "confirmed", 
+                    "Date": "2020-02-25T00:00:00Z"
+                },
+        "doc_as_upsert": True
+    }
+    
+* Source 2: **`CDC, USAFacts`** -
+
+Each document from the USAFacts is rendered into the following data structure before it posted to Elasticsearch - 
+
+For `confirmed cases` - 
+
+    {
+        "op_type": "update",
+        "_index": "covid_by_country",
+        "_type": "_doc",
+        "_id": _id,
+        "doc": {
+                    "countyFIPS": "1001", 
+                    "County Name": "Autauga County", 
+                    "State": "AL", 
+                    "stateFIPS": "1", 
+                    "reportTimestamp": "2020-02-25T00:00:00Z",
+                    "dateId": "2020-02-25", 
+                    "confirmedCases": "100"
+                },
+        "doc_as_upsert": True
+    }
+    
+For `deaths` - 
+
+    {
+        "op_type": "update",
+        "_index": "covid_by_country",
+        "_type": "_doc",
+        "_id": _id,
+        "doc": {
+                    "countyFIPS": "1001", 
+                    "County Name": "Autauga County", 
+                    "State": "AL", 
+                    "stateFIPS": "1", 
+                    "reportTimestamp": "2020-02-25T00:00:00Z",
+                    "dateId": "2020-02-25", 
+                    "confirmedCases": "100"
+                },
+        "doc_as_upsert": True
+    }
+    
 ### <b>ETL Architecture</b>
 ***
 

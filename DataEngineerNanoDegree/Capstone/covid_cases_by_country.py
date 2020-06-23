@@ -46,7 +46,7 @@ def get_unique_countries(countries):
         df = pd.DataFrame(countries)
         logger.info("Original Countries DF Shape - {}".format(df.shape))
 
-        unique_df = df.drop_duplicates(subset="Country Name")
+        unique_df = df.drop_duplicates(subset="Country")
         logger.info("Unique Countries DF Shape - {}".format(unique_df.shape))
 
         return unique_df.to_dict(orient="records")
@@ -143,7 +143,8 @@ def main():
 
         if covid_response:
             es_client = Elasticsearch(
-                hosts=[{"host": "", "port": 443}],
+                hosts=[{"host": "search-capstone-es-domain-ehzigaf6bo45hkzfurub33njte.us-west-2.es.amazonaws.com",
+                        "port": 443}],
                 timeout=300,
                 use_ssl=True,
                 verify_certs=False,

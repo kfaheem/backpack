@@ -88,7 +88,7 @@ def concat_df(files, df_type):
         concatenated_df.reset_index(inplace=True)
         logger.info("concatenated_df Shape - {}".format(concatenated_df.shape))
 
-        return concatenated_df.to_dict(orient="records")
+        return concatenated_df
 
     except Exception as exception:
         logger.error("Received Exception in concat_df function "
@@ -177,7 +177,8 @@ def main():
 
         # Set Elasticsearch Client
         es_client = Elasticsearch(
-            hosts=[{"host": "", "port": 443}],
+            hosts=[{"host": "search-capstone-es-domain-ehzigaf6bo45hkzfurub33njte.us-west-2.es.amazonaws.com",
+                    "port": 443}],
             timeout=300,
             use_ssl=True,
             verify_certs=False,

@@ -362,6 +362,29 @@ The data is obtained from two distinct sources.
     |   2 | county_populcation.csv                       |         1       |      3194      |
     
 
+### **Data Model**
+***
+
+* Source 1: **`Covid19API`** -
+
+Each row in the source data maps one-to-one with its corresponding json document as shown below. Each json document is stored under the index **covid_by_country**
+
+**Source**                          |  **Target**
+:----------------------------------:|:-------------------------:
+![](cases_by_country_table.png)     |  ![](es_by_country.png)
+             
+* Source 2: **`CDC, USAFacts`** -
+
+Each row in the source data maps one-to-one with its corresponding json document as shown below. Each json document is stored under the index **covid_by_county**
+
+**Source**                          |  **Target**
+:----------------------------------:|:-------------------------:
+![](confirmed_cases_table.png)      |  ![](es_confirmed.png)
+
+**Source**                          |  **Target**
+:----------------------------------:|:-------------------------:
+![](deaths_table.png)               |  ![](es_deaths.png)
+
 ### **Data Dictionary**
 ***
 
@@ -394,7 +417,7 @@ For `confirmed cases` -
 
     {
         "op_type": "update",
-        "_index": "covid_by_country",
+        "_index": "covid_by_county",
         "_type": "_doc",
         "_id": _id,
         "doc": {
@@ -413,7 +436,7 @@ For `deaths` -
 
     {
         "op_type": "update",
-        "_index": "covid_by_country",
+        "_index": "covid_by_county",
         "_type": "_doc",
         "_id": _id,
         "doc": {

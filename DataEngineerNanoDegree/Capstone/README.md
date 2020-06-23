@@ -367,7 +367,7 @@ The data is obtained from two distinct sources.
 
 * Source 1: **`Covid19API`** -
 
-Each document from the Covid19API is rendered into the following data structure before it posted to Elasticsearch - 
+Each document from Covid19API is rendered into the following data structure before it is posted to Elasticsearch - 
 
     {
         "op_type": "update",
@@ -388,7 +388,7 @@ Each document from the Covid19API is rendered into the following data structure 
     
 * Source 2: **`CDC, USAFacts`** -
 
-Each document from the USAFacts is rendered into the following data structure before it posted to Elasticsearch - 
+Each document from USAFacts is rendered into the following data structure before it is posted to Elasticsearch - 
 
 For `confirmed cases` - 
 
@@ -433,9 +433,9 @@ For `deaths` -
 
 There are two types of Data Quality Checks applied for this project - 
 1. The **tests** folder carries a couple of simple unit tests that leverage the pytest framework.
-   The tests give us an estimation of whether the Covid19API returns the desired response adn whether the subsequent function retains the desired data structure.
+   The tests give us an estimation of whether the Covid19API returns the desired response and whether the subsequent function retains the desired data structure.
 
-2. Log statements - Through each of the two modules - covid_cases_by_country & covid_cases_usa, there are several log statement which are designed to validate inputs & outputs to several functions as well check the dataframe shape after some transformation(s) has been applied   
+2. Log statements - Through each of the two modules - covid_cases_by_country & covid_cases_usa, there are several log statements which are designed to validate inputs & outputs to several functions as well check the dataframe shape after some transformation(s) has been applied.   
 
 ### <b>ETL Architecture</b>
 ***

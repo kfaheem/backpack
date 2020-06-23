@@ -16,7 +16,7 @@ def get_countries(api_endpoint):
     """
     I hit the covid19api endpoint which returns all the country names for which covid data is available
     :param api_endpoint: str - "https://api.covid19api.com/countries"
-    :return: list - A list of dictionaries. [{"Country Name": "United States", Slug": "united-states", "ISO2":"US"},
+    :return: list - A list of dictionaries. [{"Country Name": "United States", "Slug": "united-states", "ISO2":"US"},
     {}, ..., {}]
     """
     try:

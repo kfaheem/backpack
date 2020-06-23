@@ -423,11 +423,20 @@ For `deaths` -
                     "stateFIPS": "1", 
                     "reportTimestamp": "2020-02-25T00:00:00Z",
                     "dateId": "2020-02-25", 
-                    "confirmedCases": "100"
+                    "deaths": "100"
                 },
         "doc_as_upsert": True
     }
     
+### **Data Quality Checks**
+***
+
+There are two types of Data Quality Checks applied for this project - 
+1. The **tests** folder carries a couple of simple unit tests that leverage the pytest framework.
+   The tests give us an estimation of whether the Covid19API returns the desired response adn whether the subsequent function retains the desired data structure.
+
+2. Log statements - Through each of the two modules - covid_cases_by_country & covid_cases_usa, there are several log statement which are designed to validate inputs & outputs to several functions as well check the dataframe shape after some transformation(s) has been applied   
+
 ### <b>ETL Architecture</b>
 ***
 

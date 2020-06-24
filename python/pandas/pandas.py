@@ -235,6 +235,10 @@ def between_df(df):
     df["timestamp"].between("date-1", "date-2")
 
 
+def is_equals(df1, df2):
+    df1["col1"].isequals(df2["col2"])
+
+
 def seaborn_charts(df):
     bar_plot = sns.barplot(data=df, x="col_name", y="col_name", style="summer", hue="summer")
     # to set/reset x, y & title axes names

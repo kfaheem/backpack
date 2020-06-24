@@ -56,7 +56,7 @@ def process_song_data(spark, input_data, output_data):
         return True
 
     except Exception as exception:
-        logger.error("Received Exception in process_song_data function in etl.py - {}".format(exception))
+        logger.error("Received Exception in process_song_data function in covid_cases_by_country.py - {}".format(exception))
         raise exception
 
 
@@ -142,7 +142,7 @@ def process_log_data(spark, input_data, output_data):
         return True
 
     except Exception as exception:
-        logger.error("Received Exception in process_log_data function in etl.py - {}".format(exception))
+        logger.error("Received Exception in process_log_data function in covid_cases_by_country.py - {}".format(exception))
         raise exception
 
 

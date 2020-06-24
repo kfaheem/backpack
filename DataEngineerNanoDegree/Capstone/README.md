@@ -53,6 +53,11 @@ With the two features mentioned above, the project aims at serving two sections 
 
 ### **Kibana Visualizations**
 ***
+**`Covid Dashboard`**
+
+![](covid_dashboard.png)
+***
+
 **`Data Trend`**
 
 ![](trend.png)

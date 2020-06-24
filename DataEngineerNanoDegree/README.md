@@ -49,3 +49,4 @@ Technologies used: Apache Airflow, S3, Amazon Redshift, Python.
 ## Project 6: [**Capstone**](https://github.com/kfaheem/backpack/tree/dev/DataEngineerNanoDegree/Capstone)
 * The purpose of this project is to process Covid-19 data in an attempt to analyze & visualize the data to derive statistical information & study patterns in Covid cases in the USA & worldwide.
 
+Technologies used: Amazon Elasticsearch Service, Kibana, Python, Pandas.

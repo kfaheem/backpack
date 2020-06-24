@@ -26,6 +26,7 @@ This is where backpack comes in handy. It can have a variety of items like -
      etc
      
 The backpack also includes several Projects I've completed over the last few months with a good amount of documentation and some cool pictures.
+(Please check out [**DataEngineerNanoDegree**](https://github.com/kfaheem/backpack/tree/dev/DataEngineerNanoDegree))
 
 Since this is my backpack, I also get free access to a few bragging rights! 
 

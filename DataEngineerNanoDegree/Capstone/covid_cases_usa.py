@@ -120,21 +120,23 @@ def merge_df(covid_df, population_df):
         raise exception
 
 
-def generate_es_data(covid_data):
+def generate_es_data(covid_data, data_type):
     """
     I generate dictionary objects for each document to be posted to Elasticsearch.
     :param covid_data: list - A list of dictionaries obtained from the merge_df function.
+    :param data_type:
     :return:
     """
     try:
         for item in covid_data:
             county_name = item.get("County Name")
             date_id = item.get("dateId")
-            _id = "{}/{}".format(county_name, date_id)
+
+            _id = "{}/{}/{}".format(county_name, date_id, data_type)
 
             yield {
                 "op_type": "update",
-                "_index": "covid_usa",
+                "_index": "covid_cases_usa",
                 "_type": "_doc",
                 "_id": _id,
                 "doc": item,
@@ -186,10 +188,12 @@ def main():
         )
 
         # Post data to Elasticsearch
-        confirmed_cases_es_bulk = helpers.bulk(es_client, generate_es_data(covid_data=merged_confirmed_cases_df))
+        confirmed_cases_es_bulk = helpers.bulk(es_client, generate_es_data(covid_data=merged_confirmed_cases_df,
+                                                                           data_type="confirmed"))
         logger.info("confirmed_cases_es_bulk response - {}".format(confirmed_cases_es_bulk))
 
-        covid_deaths_es_bulk = helpers.bulk(es_client, generate_es_data(covid_data=merged_covid_deaths_df))
+        covid_deaths_es_bulk = helpers.bulk(es_client, generate_es_data(covid_data=merged_covid_deaths_df,
+                                                                        data_type="deaths"))
         logger.info("covid_deaths_es_bulk response - {}".format(covid_deaths_es_bulk))
 
     except Exception as exception:

@@ -50,6 +50,34 @@ With the two features mentioned above, the project aims at serving two sections 
 
    Since each document carries a timestamp, Elasticsearch offers a live tracker which enables us to monitor a time-series trend of the incoming data on the fly. 
 
+
+### **Kibana Visualizations**
+***
+**`Data Trend`**
+
+![](trend.png)
+***
+
+**`Covid Confirmed Cases by County`**
+
+![](pie1.png)
+***
+
+**`Covid Confirmed Cases by Date`**
+
+![](bar2.png)
+***
+
+**`Covid Deaths by County`**
+
+![](pie2.png)
+***
+
+**`Covid Death by Date`**
+
+![](bar1.png)
+***
+
 ### **Data**
 ***
 The data is obtained from two distinct sources.

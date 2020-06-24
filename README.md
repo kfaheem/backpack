@@ -17,7 +17,7 @@ is pretty simple.
 The backpack serves as a place that stores all my learnings & hacks I've picked up over the years.
 
 Especially when it comes to coding, there is usually a lot of boilerplate stuff involved.
-This is where backpack comes in handy. It can a variety of items like - 
+This is where backpack comes in handy. It can have a variety of items like - 
      
      * The packages, the client setup, query format, etc that you need to interact with Elasticsearch using Python
      * Several AWS Clients

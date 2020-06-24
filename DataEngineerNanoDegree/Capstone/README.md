@@ -78,6 +78,11 @@ With the two features mentioned above, the project aims at serving two sections 
 ![](bar1.png)
 ***
 
+**`Data Table`**
+
+![](DataTable.png)
+***
+
 ### **Data**
 ***
 The data is obtained from two distinct sources.

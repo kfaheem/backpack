@@ -1,7 +1,7 @@
 # Data Engineering Nanodegree
 
 ## **Certificate of Completion**
-![](Certificate.png)
+![](Data_Engineer_Cert.pdf)
 
 Projects and resources developed in the [DEND Nanodegree](https://github.com/kfaheem/backpack/tree/dev/DataEngineerNanoDegree) from Udacity.
 

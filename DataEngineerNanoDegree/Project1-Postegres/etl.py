@@ -30,7 +30,7 @@ def process_song_file(cur, filepath):
         cur.execute(artist_table_insert, artist_data)
 
     except Exception as exception:
-        logger.error("Received Exception in process_song_file function in etl.py - {}".format(exception))
+        logger.error("Received Exception in process_song_file function in covid_cases_by_country.py - {}".format(exception))
         raise exception
 
 
@@ -90,7 +90,7 @@ def process_log_file(cur, filepath):
             cur.execute(songplay_table_insert, songplay_data)
 
     except Exception as exception:
-        logger.error("Received Exception in process_log_file function in etl.py - {}".format(exception))
+        logger.error("Received Exception in process_log_file function in covid_cases_by_country.py - {}".format(exception))
         raise exception
 
 
@@ -122,7 +122,7 @@ def process_data(cur, conn, filepath, func):
             logger.info('{}/{} files processed.'.format(i, num_files))
 
     except Exception as exception:
-        logger.error("Received Exception in process_data function in etl.py - {}".format(exception))
+        logger.error("Received Exception in process_data function in covid_cases_by_country.py - {}".format(exception))
         raise exception
 
 

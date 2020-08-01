@@ -36,7 +36,7 @@ So you may find a bunch of my accomplishments too! (I'm very humble otherwise th
 ***
 [**Verify Badge**](https://www.youracclaim.com/badges/f4e6dba9-81de-4775-b43e-a5d22bac6ef6/public_url)
 
-![](aws-certified-solutions-architect-associate.png)
+![](aws_badge.png)
 
 ### **Data Engineering Nanodegree**
 ***

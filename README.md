@@ -34,9 +34,8 @@ So you may find a bunch of my accomplishments too! (I'm very humble otherwise th
 
 ### **AWS Solutions Architect**
 ***
-
-<div data-iframe-width="150" data-iframe-height="270" data-share-badge-id="f4e6dba9-81de-4775-b43e-a5d22bac6ef6" data-share-badge-host="https://www.youracclaim.com"></div>
-<script type="text/javascript" async src="//cdn.youracclaim.com/assets/utilities/embed.js"></script>
+[**Badge**](https://www.youracclaim.com/badges/f4e6dba9-81de-4775-b43e-a5d22bac6ef6/public_url)
+![](aws-certified-solutions-architect-associate.png)
 
 ### **Data Engineering Nanodegree**
 ***

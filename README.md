@@ -38,6 +38,8 @@ So you may find a bunch of my accomplishments too! (I'm very humble otherwise th
 
 ![](aws_badge.png)
 
+<img src="aws_badge.png" width="300" height="300" >
+
 ### **Data Engineering Nanodegree**
 ***
 

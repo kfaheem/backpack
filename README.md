@@ -38,6 +38,8 @@ So you may find a bunch of my accomplishments too! (I'm very humble otherwise th
 
 ![](aws-certified-solutions-architect-associate.png)
 
+<img src="aws-certified-solutions-architect-associate.png" width="300" height="300" >
+
 ### **Data Engineering Nanodegree**
 ***
 

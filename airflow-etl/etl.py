@@ -44,8 +44,9 @@ def get_covid_data(data_location, file_path):
 
         logger.info("df2 new shape - {}".format(df2.shape))
 
+        print(df2)
         # save data locally
-        df2.to_json(file_path)
+        df2.to_csv(file_path)
 
         return True
 

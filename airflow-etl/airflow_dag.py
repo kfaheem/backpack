@@ -1,60 +1,119 @@
-from datetime import datetime
+from datetime import datetime, timedelta
 import os
-
+import pandas as pd
+import logging
+import sys
 from airflow import DAG
-# from airflow.contrib.hooks.aws_hook import AwsHook
-# from airflow.hooks.postgres_hook import PostgresHook
-# from airflow.operators.postgres_operator import PostgresOperator
+from airflow.operators.dummy_operator import DummyOperator
+from airflow.hooks.postgres_hook import PostgresHook
+from airflow.operators.postgres_operator import PostgresOperator
 from airflow.operators.python_operator import PythonOperator
-
 from etl import get_covid_data
+from sql_queries import drop_query, create_query
 
-print(type(get_covid_data))
-print(callable(get_covid_data))
-file_path = "{}/covid_data.json".format(os.getcwd())
+# logger
+logging.basicConfig(stream=sys.stdout)
+logger = logging.getLogger()
+logger.setLevel(logging.INFO)
+
+file_path = "{}/covid_data.csv".format(os.getcwd())
 data_location = "https://healthdata.gov/data.json"
+
+
+def insert_data(filepath):
+    """
+
+    :param filepath:
+    :return:
+    """
+    try:
+        postgres_hook = PostgresHook("postgres_db")
+
+        table_columns = ['@type', 'accessLevel', 'bureauCode', 'description', 'distribution',
+                         'identifier', 'issued', 'keyword', 'landingPage', 'modified',
+                         'programCode', 'theme', 'title', 'contactPoint.fn',
+                         'contactPoint.hasEmail', 'publisher.@type', 'publisher.name',
+                         'describedBy', 'references', 'accrualPeriodicity', 'temporal',
+                         'dataQuality', 'license', 'describedByType', 'rights', 'language']
+
+        df1 = pd.read_csv(filepath)
+
+        insert_query = """INSERT INTO covid_data_tb ({}) VALUES ({})
+        """.format(",".join(table_columns), "%s, " * 26)
+
+        for i, row in df1.iterrows():
+            postgres_hook.run(insert_query, row)
+
+    except Exception as exception:
+        logger.error("Received Exception in create_tables function - {}".format(exception))
+        raise exception
+
+
+def data_check():
+    """
+
+    :return:
+    """
+    try:
+        postgres_hook = PostgresHook("postgres_db")
+        select_query = "SELECT keyword FROM covid_data_tb LIMIT 10"
+        postgres_hook.run(select_query)
+
+    except Exception as exception:
+        logger.error("Received Exception in data_check function - {}".format(exception))
+        raise exception
+
+
+default_args = {
+    'owner': 'Brijesh Goharia',
+    'start_date': datetime.now(),
+    'depends_on_past': False,
+    'retries': 3,
+    'retry_delay': timedelta(minutes=5),
+    'catchup': True,
+    'email_on_retry': False
+}
 
 dag = DAG(
     'Airflow_etl',
-    start_date=datetime.now()
+    default_args=default_args,
+    schedule_interval="@daily"
 )
 
-save_data_task = PythonOperator(
+start_operator = DummyOperator(task_id='Begin_execution',  dag=dag)
+
+save_covid_data_task = PythonOperator(
     task_id='save_data_from_source_to_local',
     dag=dag,
     python_callable=get_covid_data(data_location, file_path)
 )
 
-# def load_data_to_redshift(*args, **kwargs):
-#     aws_hook = AwsHook("aws_credentials")
-#     credentials = aws_hook.get_credentials()
-#     redshift_hook = PostgresHook("redshift")
-#     redshift_hook.run(sql.COPY_ALL_TRIPS_SQL.format(credentials.access_key, credentials.secret_key))
-#
-#
-#
-#
-# create_table = PostgresOperator(
-#     task_id="create_table",
-#     dag=dag,
-#     postgres_conn_id="redshift",
-#     sql=sql_statements.CREATE_TRIPS_TABLE_SQL
-# )
-#
-# copy_task = PythonOperator(
-#     task_id='load_from_s3_to_redshift',
-#     dag=dag,
-#     python_callable=load_data_to_redshift
-# )
-#
-# location_traffic_task = PostgresOperator(
-#     task_id="calculate_location_traffic",
-#     dag=dag,
-#     postgres_conn_id="redshift",
-#     sql=sql_statements.LOCATION_TRAFFIC_SQL
-# )
-#
-# create_table >> copy_task
-# copy_task >> location_traffic_task
+drop_table_task = PostgresOperator(
+    task_id="drop_table",
+    dag=dag,
+    postgres_conn_id="postgres_db",
+    sql=drop_query
+)
 
-# https://github.com/apache/airflow/tree/master/airflow/contrib
+create_table_task = PostgresOperator(
+    task_id="create_table",
+    dag=dag,
+    postgres_conn_id="postgres_db",
+    sql=create_query
+)
+
+insert_task = PythonOperator(
+    task_id='insert_data',
+    dag=dag,
+    python_callable=insert_data(file_path)
+)
+
+data_check_task = PythonOperator(
+    task_id='data_check',
+    dag=dag,
+    python_callable=data_check()
+)
+
+end_operator = DummyOperator(task_id='Stop_execution',  dag=dag)
+
+start_operator >> save_covid_data >> drop_table >> create_table >> insert_task >> data_check_task >> end_operator

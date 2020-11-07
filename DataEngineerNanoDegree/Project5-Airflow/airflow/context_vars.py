@@ -11,5 +11,5 @@ task = PythonOperator(
     provide_context=True,
     dag=divvy_dag)
 
-# Default vars that airflow can pass as kwargs to a function
+# Default vars that airflow-etl can pass as kwargs to a function
 # https://airflow.apache.org/docs/stable/macros-ref

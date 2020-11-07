@@ -27,7 +27,7 @@ def insert_data(filepath):
     :return:
     """
     try:
-        postgres_hook = PostgresHook("postgres_db")
+        postgres_hook = PostgresHook("redshift")
 
         table_columns = ['@type', 'accessLevel', 'bureauCode', 'description', 'distribution',
                          'identifier', 'issued', 'keyword', 'landingPage', 'modified',
@@ -55,7 +55,7 @@ def data_check():
     :return:
     """
     try:
-        postgres_hook = PostgresHook("postgres_db")
+        postgres_hook = PostgresHook("redshift")
         select_query = "SELECT keyword FROM covid_data_tb LIMIT 10"
         postgres_hook.run(select_query)
 
@@ -91,18 +91,18 @@ save_covid_data_task = PythonOperator(
 drop_table_task = PostgresOperator(
     task_id="drop_table",
     dag=dag,
-    postgres_conn_id="postgres_db",
+    postgres_conn_id="redshift",
     sql=drop_query
 )
 
 create_table_task = PostgresOperator(
     task_id="create_table",
     dag=dag,
-    postgres_conn_id="postgres_db",
+    postgres_conn_id="redshift",
     sql=create_query
 )
 
-insert_task = PythonOperator(
+insert_data_task = PythonOperator(
     task_id='insert_data',
     dag=dag,
     python_callable=insert_data(file_path)
@@ -116,4 +116,4 @@ data_check_task = PythonOperator(
 
 end_operator = DummyOperator(task_id='Stop_execution',  dag=dag)
 
-start_operator >> save_covid_data >> drop_table >> create_table >> insert_task >> data_check_task >> end_operator
+start_operator >> save_covid_data_task >> drop_table_task >> create_table_task >> insert_data_task >> data_check_task >> end_operator

@@ -41,5 +41,14 @@ with open("pdf_file_name", 'rb') as file:
 file_names = ["file_name_1", "file_name_3", "file_name_2"]
 sorted_chunks = sorted(file_names, key=lambda x: x.split("_")[-1])
 
+with open("big_file", 'wb') as bfile, fileinput.input(sorted_chunks) as cfile:
 
-#
+    for line in cfile:
+        bfile.write(line)
+
+
+# convert img to pdf
+
+with open("file.pdf", 'wb') as pdf_file, open("img.jpg", 'r') as img:
+
+    pdf_file.write(img2pdf(img))

@@ -1,0 +1,3 @@
+FreeTDS is how we can connect to MS SQL Servers
+
+Installation: brew install freetds

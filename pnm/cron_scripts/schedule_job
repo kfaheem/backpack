@@ -1,0 +1,3 @@
+# Cron schedule to run sh script
+
+* 11 * * * Mon-Fri schedule_job.sh
